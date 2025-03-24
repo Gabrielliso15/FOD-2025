@@ -1,0 +1,35 @@
+program ej1;
+var
+	arch : File of integer;
+	num:integer;
+	archivo: String;
+begin
+	{ === CREAR Y ESCRIBIR EL ARCHIVO === }
+	 writeln('Ingrese el nombre del archivo:');
+	readln(archivo);  { El usuario ingresa el nombre del archivo }
+	
+	Assign(arch,archivo); {asigna el archivo} 
+	rewrite(arch); {crea desde cero el archivo} 
+	
+	writeln('Ingrese un Numeros Entero o 30000 para finalizar');
+	readln(num);
+	while (num <> 30000) do begin
+		write(arch,num);{ guarda el numero en el archivo }
+		writeln('Ingrese un Numeros Entero o 30000 para finalizar');
+		readln(num);
+	end;
+	Close(arch); { Cierra el archivo }
+	writeln('Archivo creado con exito.');
+	
+	{ === LEER Y MOSTRAR EL ARCHIVO === }
+	assign(arch,'numeros.dat');
+	reset(arch); {abre el archivo en modo lectura}
+	
+	writeln('Contenido del archivo');
+	while not Eof(arch) do begin
+		read(arch,num);{lee un numero}
+		writeln(num); {lo muestra en consola} 
+	end; 
+	Close(arch); { Cierra el archivo }
+	writeln('Fin de la lectura.');
+end.
