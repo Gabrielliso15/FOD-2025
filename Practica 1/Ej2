@@ -1,1 +1,33 @@
+program ej2;
+var
+	arch : File of integer;
+	archivo: String;
+	cant1500,cant,num:integer;
+	prom:real;
+begin
+	cant:= 0;
+	cant1500:= 0;
+	prom:= 0;
+	writeln('Ingrese el nombre del archivo a abrir:');
+	readln(archivo);  { El usuario ingresa el nombre del archivo }
+	
+	assign(arch,archivo);
+	reset(arch); {abre el archivo en modo lectura}
+	
+	writeln('Contenido del archivo');
+	while not Eof(arch) do begin
+		read(arch,num);{lee un numero}
+		if (num < 1500) then begin
+			cant1500:= cant + 1;
+		end;
+		cant:= cant + 1;
+		prom:= prom + num;
+		writeln(num); {lo muestra en consola} 
+	end; 
+	prom:= prom/cant;
+	Close(arch); { Cierra el archivo }
+	writeln('Fin de la lectura.');
+	writeln('Cantidad de numeros menores a 1500 : ',cant1500);
+	writeln('Promedio de numeros ingresados : ',prom:2:0);
+end.
 
